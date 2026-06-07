@@ -16,14 +16,33 @@
   </aside>
 
   <main class="profile-stage" *ngIf="currentUser$ | async as user; else createProfile">
-    <h1>Congratulations!</h1>
-    <section class="success-card">
-      <img src="https://api.dicebear.com/9.x/notionists/svg?seed=king-beard-ape&backgroundColor=8fe3ee" alt="Owned NFT">
+    <h1>Profile</h1>
+    <section class="success-card profile-summary">
+      <div class="avatar-preview">{{ user.username.slice(0, 2).toUpperCase() }}</div>
       <div>
         <h2>{{ user.username }}</h2>
         <p>{{ user.email }}</p>
         <button type="button" (click)="logout()">Logout</button>
       </div>
+    </section>
+
+    <section class="owned-section" *ngIf="userNfts$ | async as userNftIds">
+      <h2>My NFT's</h2>
+      <ng-container *ngIf="allNfts$ | async as allNfts">
+        <div class="owned-grid" *ngIf="userNftIds.length > 0; else emptyCollection">
+          <ng-container *ngFor="let nft of allNfts">
+            <article class="owned-card" *ngIf="userNftIds.includes(nft.id)">
+              <img [src]="nft.image" [alt]="nft.name">
+              <span>{{ nft.name }}</span>
+              <small>{{ nft.price }} ETH</small>
+            </article>
+          </ng-container>
+        </div>
+        <ng-template #emptyCollection>
+          <p class="empty-state">You have not bought any NFT yet.</p>
+          <a routerLink="/catalog" class="save-button">Catalog</a>
+        </ng-template>
+      </ng-container>
     </section>
   </main>
 

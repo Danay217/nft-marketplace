@@ -19,7 +19,15 @@ export class ProfileComponent {
   userNfts$ = this.nftService.userNfts$;
   allNfts$ = this.nftService.nfts$;
 
+  constructor() {
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.nftService.loadUserNfts(user.id);
+    }
+  }
+
   logout(): void {
     this.authService.logout();
+    this.nftService.clearUserNfts();
   }
 }

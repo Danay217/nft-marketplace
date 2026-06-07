@@ -35,17 +35,15 @@ export class CatalogComponent {
   );
   selectedNft$ = this.nftService.selectedNft$;
   currentUser$ = this.authService.currentUser$;
-  
-  isLoggedIn$ = this.authService.currentUser$;
+
   newComment = '';
-  showAddNftForm = false;
-  newNftData = {
-    name: '',
-    price: 0,
-    image: '',
-    description: '',
-    creator: ''
-  };
+
+  constructor() {
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.nftService.loadUserNfts(user.id);
+    }
+  }
 
   selectNft(id: string): void {
     this.nftService.selectNft(id);
@@ -74,50 +72,22 @@ export class CatalogComponent {
 
   logout(): void {
     this.authService.logout();
+    this.nftService.clearUserNfts();
   }
 
   userOwnNft(nftId: string): boolean {
     return this.nftService.userOwnNft(nftId);
   }
 
-  toggleAddNftForm(): void {
-    this.showAddNftForm = !this.showAddNftForm;
-  }
-
-  addNewNft(): void {
-    if (this.newNftData.name && this.newNftData.price && this.newNftData.image && this.newNftData.description) {
-      const user = this.authService.getCurrentUser();
-      this.nftService.addNft({
-        name: this.newNftData.name,
-        price: this.newNftData.price,
-        image: this.newNftData.image,
-        description: this.newNftData.description,
-        creator: user?.username || 'Anonymous'
-      });
-      this.resetNftForm();
-    }
-  }
-
-  navigatePrevious(nfts: any[], currentNft: any): void {
+  navigatePrevious(nfts: NFT[], currentNft: NFT): void {
     const index = nfts.findIndex(n => n.id === currentNft.id);
     const prevIndex = (index - 1 + nfts.length) % nfts.length;
     this.selectNft(nfts[prevIndex].id);
   }
 
-  navigateNext(nfts: any[], currentNft: any): void {
+  navigateNext(nfts: NFT[], currentNft: NFT): void {
     const index = nfts.findIndex(n => n.id === currentNft.id);
     const nextIndex = (index + 1) % nfts.length;
     this.selectNft(nfts[nextIndex].id);
-  }
-
-  private resetNftForm(): void {
-    this.newNftData = {
-      name: '',
-      price: 0,
-      image: '',
-      description: '',
-      creator: ''
-    };
-    this.showAddNftForm = false;
   }
 }

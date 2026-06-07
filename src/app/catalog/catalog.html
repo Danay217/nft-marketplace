@@ -44,6 +44,7 @@
         <div class="detail-copy">
           <h2>{{ nft.name }}</h2>
           <p class="detail-meta">Mint #{{ nft.id.padStart(4, '0') }}</p>
+          <p class="detail-meta">Category: {{ nft.category }}</p>
           <p>{{ nft.description }}</p>
           <ng-container *ngIf="currentUser$ | async; else guestActions">
             <div class="detail-actions">
@@ -74,6 +75,10 @@
       </div>
 
       <h3 class="more-title">More by {{ nft.creator }}</h3>
+      <div class="nft-navigation" *ngIf="filteredNfts$ | async as nfts">
+        <button type="button" (click)="navigatePrevious(nfts, nft)">Previous</button>
+        <button type="button" (click)="navigateNext(nfts, nft)">Next</button>
+      </div>
       <div class="more-grid" *ngIf="filteredNfts$ | async as moreNfts">
         <button *ngFor="let item of moreNfts.slice(0, 8)" class="mini-card" type="button" (click)="selectNft(item.id)">
           <img [src]="item.image" [alt]="item.name" />

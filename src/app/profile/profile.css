@@ -79,6 +79,11 @@
   align-items: start;
 }
 
+.profile-summary {
+  grid-template-columns: 60px 1fr;
+  margin-bottom: 24px;
+}
+
 .success-card img {
   width: 126px;
   aspect-ratio: 1;
@@ -199,6 +204,55 @@ textarea {
   margin: 14px auto 0;
 }
 
+.owned-section h2 {
+  margin: 0 0 10px;
+  color: #f2fbfb;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.owned-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.owned-card {
+  overflow: hidden;
+  border: 1px solid rgba(57, 210, 193, 0.12);
+  border-radius: 3px;
+  background: rgba(6, 13, 24, 0.73);
+}
+
+.owned-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.owned-card span,
+.owned-card small {
+  display: block;
+  padding: 5px 6px 0;
+  color: #f1f7f7;
+  font-size: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.owned-card small {
+  padding-bottom: 6px;
+  color: #40d1a2;
+}
+
+.empty-state {
+  margin: 0;
+  color: #8ba5ab;
+  font-size: 6px;
+}
+
 @media (min-width: 900px) {
   .profile-frame {
     width: min(980px, calc(100vw - 48px));
@@ -237,6 +291,10 @@ textarea {
     gap: 42px;
   }
 
+  .profile-summary {
+    grid-template-columns: 108px 1fr;
+  }
+
   .success-card img {
     width: 300px;
   }
@@ -247,8 +305,28 @@ textarea {
 
   .success-card p,
   .profile-note,
-  label {
+  label,
+  .empty-state {
     font-size: 14px;
+  }
+
+  .owned-section h2 {
+    font-size: 24px;
+  }
+
+  .owned-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .owned-card span,
+  .owned-card small {
+    padding: 12px 12px 0;
+    font-size: 14px;
+  }
+
+  .owned-card small {
+    padding-bottom: 12px;
   }
 
   .success-card button,
@@ -342,6 +420,10 @@ textarea {
     gap: 18px;
   }
 
+  .profile-summary {
+    grid-template-columns: 84px 1fr;
+  }
+
   .success-card img {
     width: min(100%, 300px);
   }
@@ -352,8 +434,18 @@ textarea {
 
   .success-card p,
   .profile-note,
-  label {
+  label,
+  .empty-state {
     font-size: 13px;
+  }
+
+  .owned-section h2 {
+    font-size: 20px;
+  }
+
+  .owned-card span,
+  .owned-card small {
+    font-size: 12px;
   }
 
   .success-card button,

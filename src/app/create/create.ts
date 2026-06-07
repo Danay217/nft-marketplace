@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -10,7 +10,7 @@ import { NftService } from '../services/nft.service';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './create.html',
-  styleUrl: './create.css'
+  styleUrl: './create.css',
 })
 export class CreateComponent {
   private authService = inject(AuthService);
@@ -32,31 +32,42 @@ export class CreateComponent {
     this.errorMessage = '';
     this.successMessage = '';
 
-    if (!this.itemName || !this.itemPrice || !this.itemImage || !this.itemDescription) {
-      this.errorMessage = 'Пожалуйста, заполните все поля';
+    const name = this.itemName.trim();
+    const image = this.itemImage.trim();
+    const description = this.itemDescription.trim();
+
+    if (!name || !this.itemPrice || !image || !description) {
+      this.errorMessage = 'Fill in all fields';
+      return;
+    }
+
+    if (this.itemPrice <= 0) {
+      this.errorMessage = 'Price must be greater than 0';
       return;
     }
 
     const user = this.authService.getCurrentUser();
     if (!user) {
-      this.errorMessage = 'Только авторизованные пользователи могут создавать NFT';
+      this.errorMessage = 'Only logged in users can create NFT';
       return;
     }
 
     this.nftService.addNft({
-      name: this.itemName,
+      name,
       price: this.itemPrice,
-      image: this.itemImage,
-      description: this.itemDescription,
-      creator: user.username
+      image,
+      category: this.itemCategory,
+      description,
+      creator: user.username,
     });
 
-    this.successMessage = 'NFT успешно создано! Проверьте его в каталоге.';
+    this.successMessage = 'NFT created. Check it in the catalog.';
     this.clearForm();
   }
 
   logout(): void {
     this.authService.logout();
+    this.nftService.clearUserNfts();
   }
 
   private clearForm(): void {

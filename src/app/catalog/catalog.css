@@ -283,6 +283,23 @@ a,
   margin-top: 14px;
 }
 
+.nft-navigation {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.nft-navigation button {
+  width: 52px;
+  height: 14px;
+  border: 1px solid rgba(63, 209, 162, 0.35);
+  border-radius: 2px;
+  background: rgba(3, 12, 18, 0.7);
+  color: #dffcf4;
+  cursor: pointer;
+  font-size: 5px;
+}
+
 .more-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -411,7 +428,8 @@ a,
   }
 
   .tiny-action,
-  .add-comment button {
+  .add-comment button,
+  .nft-navigation button {
     width: 98px;
     height: 30px;
     border-radius: 5px;
@@ -538,7 +556,8 @@ a,
   }
 
   .tiny-action,
-  .add-comment button {
+  .add-comment button,
+  .nft-navigation button {
     width: 92px;
     height: 30px;
     font-size: 12px;
