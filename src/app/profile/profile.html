@@ -1,0 +1,51 @@
+<div class="profile-frame">
+  <aside class="side-rail">
+    <a routerLink="/catalog" class="rail-logo">NFT's</a>
+    <nav *ngIf="currentUser$ | async; else guestNav">
+      <a routerLink="/profile" class="active">Profile</a>
+      <a routerLink="/catalog">Catalog</a>
+      <a routerLink="/create">Create</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </nav>
+    <ng-template #guestNav>
+      <nav>
+        <a routerLink="/login">Login</a>
+        <a routerLink="/catalog">Catalog</a>
+      </nav>
+    </ng-template>
+  </aside>
+
+  <main class="profile-stage" *ngIf="currentUser$ | async as user; else createProfile">
+    <h1>Congratulations!</h1>
+    <section class="success-card">
+      <img src="https://api.dicebear.com/9.x/notionists/svg?seed=king-beard-ape&backgroundColor=8fe3ee" alt="Owned NFT">
+      <div>
+        <h2>{{ user.username }}</h2>
+        <p>{{ user.email }}</p>
+        <button type="button" (click)="logout()">Logout</button>
+      </div>
+    </section>
+  </main>
+
+  <ng-template #createProfile>
+    <main class="profile-stage editor">
+      <section class="profile-panel">
+        <div class="panel-head">
+          <h1>Create Profile</h1>
+          <a routerLink="/login">x</a>
+        </div>
+
+        <div class="avatar-preview">UP</div>
+        <p class="profile-note">Upload your avatar and profile information before collecting NFT's.</p>
+
+        <label>Username</label>
+        <input value="Anonymous" aria-label="Username">
+
+        <label>Bio</label>
+        <textarea aria-label="Bio">NFT collector and digital art trainer.</textarea>
+
+        <a routerLink="/login" class="save-button">Save</a>
+      </section>
+    </main>
+  </ng-template>
+</div>

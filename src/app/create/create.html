@@ -1,0 +1,64 @@
+<div class="create-frame">
+  <aside class="side-rail">
+    <a routerLink="/catalog" class="rail-logo">NFT's</a>
+    <nav *ngIf="currentUser$ | async as user; else guestNav">
+      <a routerLink="/profile">Profile</a>
+      <a routerLink="/catalog">Catalog</a>
+      <a routerLink="/create" class="active">Create</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </nav>
+    <ng-template #guestNav>
+      <nav>
+        <a routerLink="/login">Login</a>
+        <a routerLink="/catalog">Catalog</a>
+      </nav>
+    </ng-template>
+  </aside>
+
+  <main class="create-stage" *ngIf="currentUser$ | async; else loginRequired">
+    <div class="create-top">
+      <h1>Create Item</h1>
+      <a routerLink="/catalog">Back</a>
+    </div>
+
+    <section class="create-panel">
+      <div class="upload-column">
+        <div class="upload-box">
+          <span>Upload File</span>
+          <small>PNG, JPG, SVG</small>
+        </div>
+        <label>Description</label>
+        <textarea [(ngModel)]="itemDescription" placeholder="Describe your NFT"></textarea>
+      </div>
+
+      <div class="form-column">
+        <label>Item Name</label>
+        <input [(ngModel)]="itemName" placeholder="King Beard Ape">
+
+        <label>Category</label>
+        <select [(ngModel)]="itemCategory">
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+
+        <label>Price ETH</label>
+        <input type="number" [(ngModel)]="itemPrice" placeholder="1.25">
+
+        <label>Image URL</label>
+        <input [(ngModel)]="itemImage" placeholder="https://...">
+
+        <button type="button" (click)="createItem()">Create</button>
+      </div>
+    </section>
+
+    <p class="message success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="message error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </main>
+
+  <ng-template #loginRequired>
+    <main class="create-stage locked">
+      <h1>Create Item</h1>
+      <p>Only registered users can add NFT to the collection.</p>
+      <a routerLink="/login" class="login-link">Login</a>
+    </main>
+  </ng-template>
+</div>

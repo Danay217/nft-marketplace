@@ -1,0 +1,400 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #1b1b1b;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-frame {
+  width: min(390px, 100vw);
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  color: #eff8f8;
+  background:
+    radial-gradient(circle at 25% 82%, rgba(14, 142, 174, 0.48), transparent 26%),
+    radial-gradient(circle at 67% 76%, rgba(75, 46, 132, 0.62), transparent 29%),
+    linear-gradient(116deg, #071318 0%, #102a34 29%, #101424 58%, #050707 100%);
+}
+
+.side-rail {
+  padding: 10px 8px;
+  background: rgba(2, 9, 13, 0.42);
+}
+
+.rail-logo {
+  display: block;
+  margin-bottom: 22px;
+  color: #dffcff;
+  font-size: 10px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.side-rail nav {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.side-rail a,
+.side-rail button {
+  color: #7aa0a9;
+  font-size: 6px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.side-rail button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.side-rail a.active,
+.side-rail a:hover,
+.side-rail button:hover {
+  color: #37d7a8;
+}
+
+.profile-stage {
+  padding: 27px 25px;
+}
+
+.profile-stage h1 {
+  margin: 0 0 9px;
+  color: #f2fbfb;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.success-card {
+  display: grid;
+  grid-template-columns: 126px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.success-card img {
+  width: 126px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #eaf6fb;
+}
+
+.success-card h2 {
+  margin: 8px 0 5px;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.success-card p {
+  margin: 0 0 10px;
+  color: #8ba5ab;
+  font-size: 5px;
+}
+
+.success-card button,
+.save-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 12px;
+  border: 0;
+  border-radius: 2px;
+  background: #3fd1a2;
+  color: #fff;
+  cursor: pointer;
+  font-size: 5px;
+  text-decoration: none;
+}
+
+.editor {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.profile-panel {
+  width: 178px;
+  padding: 12px 13px 18px;
+  border-radius: 3px;
+  background: rgba(7, 15, 27, 0.72);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.panel-head h1 {
+  margin: 0;
+  font-size: 10px;
+}
+
+.panel-head a {
+  color: #a7c0c7;
+  font-size: 8px;
+  text-decoration: none;
+}
+
+.avatar-preview {
+  width: 47px;
+  height: 47px;
+  margin-bottom: 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #071111;
+  border: 1px solid #143b40;
+  color: #33d5a6;
+  font-size: 8px;
+}
+
+.profile-note {
+  margin: 0 0 12px 58px;
+  color: #7fa0a6;
+  font-size: 5px;
+  line-height: 1.4;
+}
+
+label {
+  display: block;
+  margin: 8px 0 4px;
+  color: #9db5ba;
+  font-size: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(59, 211, 194, 0.13);
+  border-radius: 2px;
+  background: rgba(3, 12, 18, 0.72);
+  color: #dcebed;
+  font-size: 6px;
+  font-family: inherit;
+}
+
+input {
+  height: 16px;
+  padding: 0 6px;
+}
+
+textarea {
+  height: 46px;
+  padding: 5px 6px;
+  resize: none;
+}
+
+.save-button {
+  margin: 14px auto 0;
+}
+
+@media (min-width: 900px) {
+  .profile-frame {
+    width: min(980px, calc(100vw - 48px));
+    grid-template-columns: 150px 1fr;
+  }
+
+  .side-rail {
+    padding: 28px 24px;
+  }
+
+  .rail-logo {
+    margin-bottom: 46px;
+    font-size: 24px;
+  }
+
+  .side-rail nav {
+    gap: 22px;
+  }
+
+  .side-rail a,
+  .side-rail button {
+    font-size: 15px;
+  }
+
+  .profile-stage {
+    padding: 58px 60px;
+  }
+
+  .profile-stage h1 {
+    margin-bottom: 22px;
+    font-size: 32px;
+  }
+
+  .success-card {
+    grid-template-columns: 300px 1fr;
+    gap: 42px;
+  }
+
+  .success-card img {
+    width: 300px;
+  }
+
+  .success-card h2 {
+    font-size: 22px;
+  }
+
+  .success-card p,
+  .profile-note,
+  label {
+    font-size: 14px;
+  }
+
+  .success-card button,
+  .save-button {
+    width: 98px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+  .profile-panel {
+    width: 420px;
+    padding: 28px 30px 34px;
+    border-radius: 8px;
+  }
+
+  .panel-head h1 {
+    font-size: 24px;
+  }
+
+  .panel-head a {
+    font-size: 20px;
+  }
+
+  .avatar-preview {
+    width: 108px;
+    height: 108px;
+    font-size: 20px;
+  }
+
+  .profile-note {
+    margin-left: 128px;
+  }
+
+  input {
+    height: 42px;
+    padding: 0 14px;
+    font-size: 15px;
+  }
+
+  textarea {
+    height: 110px;
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-frame {
+    width: 100vw;
+    grid-template-columns: 1fr;
+  }
+
+  .side-rail {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: rgba(2, 9, 13, 0.82);
+    backdrop-filter: blur(12px);
+  }
+
+  .rail-logo {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .side-rail nav {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .side-rail a,
+  .side-rail button {
+    font-size: 12px;
+  }
+
+  .profile-stage {
+    padding: 28px 18px 42px;
+  }
+
+  .profile-stage h1 {
+    font-size: 24px;
+  }
+
+  .success-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .success-card img {
+    width: min(100%, 300px);
+  }
+
+  .success-card h2 {
+    font-size: 18px;
+  }
+
+  .success-card p,
+  .profile-note,
+  label {
+    font-size: 13px;
+  }
+
+  .success-card button,
+  .save-button {
+    width: 82px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .editor {
+    padding-top: 34px;
+  }
+
+  .profile-panel {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .panel-head h1 {
+    font-size: 22px;
+  }
+
+  .avatar-preview {
+    width: 84px;
+    height: 84px;
+    font-size: 18px;
+  }
+
+  .profile-note {
+    margin-left: 0;
+  }
+
+  input {
+    height: 40px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  textarea {
+    height: 100px;
+    padding: 12px;
+    font-size: 14px;
+  }
+}

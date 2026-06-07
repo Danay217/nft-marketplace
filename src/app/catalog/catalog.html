@@ -1,0 +1,86 @@
+<div class="market-frame">
+  <aside class="side-rail">
+    <a routerLink="/catalog" class="rail-logo">NFT's</a>
+    <nav *ngIf="currentUser$ | async as user; else guestNav">
+      <a routerLink="/profile">Profile</a>
+      <a routerLink="/catalog" class="active">Catalog</a>
+      <a routerLink="/create">Create</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </nav>
+    <ng-template #guestNav>
+      <nav>
+        <a routerLink="/login">Login</a>
+        <a routerLink="/catalog" class="active">Catalog</a>
+      </nav>
+    </ng-template>
+  </aside>
+
+  <main class="catalog-stage">
+    <header class="catalog-header">
+      <h1>NFT's</h1>
+      <div class="header-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <section class="nft-grid" *ngIf="filteredNfts$ | async as nfts">
+      <button *ngFor="let nft of nfts" class="nft-card" type="button" (click)="selectNft(nft.id)">
+        <img [src]="nft.image" [alt]="nft.name" class="nft-image" />
+        <span class="card-name">{{ nft.name }}</span>
+        <span class="card-creator">{{ nft.creator }}</span>
+        <span class="card-bottom">
+          <span>{{ nft.price }} ETH</span>
+          <span>{{ nft.votes }}</span>
+        </span>
+      </button>
+    </section>
+
+    <section class="nft-details-page" *ngIf="selectedNft$ | async as nft">
+      <button class="details-close" type="button" (click)="selectNft('')">x</button>
+      <div class="details-layout">
+        <img [src]="nft.image" [alt]="nft.name" class="detail-image" />
+        <div class="detail-copy">
+          <h2>{{ nft.name }}</h2>
+          <p class="detail-meta">Mint #{{ nft.id.padStart(4, '0') }}</p>
+          <p>{{ nft.description }}</p>
+          <ng-container *ngIf="currentUser$ | async; else guestActions">
+            <div class="detail-actions">
+              <button class="tiny-action" type="button" (click)="voteForNft(nft.id)">Vote {{ nft.votes }}</button>
+              <button class="tiny-action" type="button" (click)="buyNft(nft.id)">
+                {{ userOwnNft(nft.id) ? 'Owned' : 'Buy now' }}
+              </button>
+            </div>
+          </ng-container>
+          <ng-template #guestActions>
+            <a routerLink="/login" class="login-hint">Login to vote, buy and comment</a>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="comments-strip">
+        <h3>Comments</h3>
+        <div class="add-comment" *ngIf="currentUser$ | async">
+          <textarea [(ngModel)]="newComment" placeholder="Add comment"></textarea>
+          <button type="button" (click)="addComment(nft.id)">Send</button>
+        </div>
+        <div class="comments-list" *ngIf="nft.comments.length > 0; else noComments">
+          <p *ngFor="let comment of nft.comments">{{ comment.text }}</p>
+        </div>
+        <ng-template #noComments>
+          <p>No comments yet</p>
+        </ng-template>
+      </div>
+
+      <h3 class="more-title">More by {{ nft.creator }}</h3>
+      <div class="more-grid" *ngIf="filteredNfts$ | async as moreNfts">
+        <button *ngFor="let item of moreNfts.slice(0, 8)" class="mini-card" type="button" (click)="selectNft(item.id)">
+          <img [src]="item.image" [alt]="item.name" />
+          <span>{{ item.name }}</span>
+          <small>{{ item.price }} ETH</small>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>

@@ -1,0 +1,60 @@
+<div class="login-screen">
+  <section class="login-dialog" aria-label="Login form">
+    <div class="dialog-header">
+      <h1>{{ isRegistering ? 'Register' : 'Login' }}</h1>
+      <button type="button" class="close-btn" aria-label="Close" (click)="goToCatalog()">x</button>
+    </div>
+
+    <form (ngSubmit)="isRegistering ? register() : login()" class="login-form">
+      <input
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        placeholder="Login"
+        aria-label="Login"
+        required
+      >
+
+      <input
+        *ngIf="isRegistering"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Email"
+        aria-label="Email"
+        required
+      >
+
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Password"
+        aria-label="Password"
+        required
+      >
+
+      <input
+        *ngIf="isRegistering"
+        type="password"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirm password"
+        aria-label="Confirm password"
+        required
+      >
+
+      <div class="form-row">
+        <button type="button" (click)="toggleMode()" class="register-link">
+          {{ isRegistering ? 'Login' : 'Register' }}
+        </button>
+      </div>
+
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" class="login-button">
+        {{ isRegistering ? 'Register' : 'Login' }}
+      </button>
+    </form>
+  </section>
+</div>
